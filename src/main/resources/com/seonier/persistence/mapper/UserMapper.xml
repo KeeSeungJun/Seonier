@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seonier.persistence.mapper.UserMapper">
+
+    <sql id="user">
+        <![CDATA[
+              USR_NO            AS userNo
+            , USR_ID            AS userId
+            , PASSWD            AS passwd
+            , USR_NM            AS userName
+            , USR_MBTLNUM       AS mobileNumber
+            , USR_GRP_ID        AS userGroupId
+            , USE_AT            AS useAT
+            , CREAT_ID          AS createId
+            , CREAT_DT          AS createDate
+            , UPDT_ID           AS updateId
+            , UPDT_DT           AS updateDate
+        ]]>
+    </sql>
+
+    <select id="findByUserNo" resultType="com.seonier.persistence.model.User">
+        <![CDATA[
+        -- 사용자 일련번호로 사용자 조회.
+        SELECT
+        ]]>
+            <include refid="user" />
+        <![CDATA[
+        FROM
+            USR_INFO
+        WHERE
+            USR_NO              = #{userNo}
+        ]]>
+    </select>
+
+    <select id="findByUserId" resultType="com.seonier.persistence.model.User">
+        <![CDATA[
+        -- 사용자 아이디로 사용자 조회.
+        SELECT
+              USR_NO            AS userNo
+            , USR_ID            AS userId
+            , PASSWD            AS passwd
+            , USR_NM            AS userName
+            , USR_MBTLNUM       AS mobileNumber
+            , USR_GRP_ID        AS userGroupId
+            , USE_AT            AS useAT
+            , CREAT_ID          AS createId
+            , CREAT_DT          AS createDate
+            , UPDT_ID           AS updateId
+            , UPDT_DT           AS updateDate
+        FROM
+            USR_INFO
+        WHERE
+            USR_ID              = #{userId}
+        ]]>
+    </select>
+
+</mapper>
