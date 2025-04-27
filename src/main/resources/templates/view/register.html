@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}" />
+    <link rel="stylesheet" href="/css/register.css" />
+    <script type="text/javascript" th:src="@{/js/register.js}"></script>
+    <script src='/js/register.js'></script>
+</head>
+<body>
+<div class="register-container">
+    <h2>회원가입</h2>
+    <form id="registerForm" th:action="@{/register}" method="post">
+        <!-- 스텝 1-->
+        <div id="main" class="main.active">
+            <!-- 첫 번째 단계 내용 -->
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" required />
+            </div>
+            <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요" required />
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요" required />
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">비밀번호 확인</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="비밀번호를 다시 입력해주세요" required />
+            </div>
+            <div class="form-group">
+                <label>성별</label>
+                <div class="gender-buttons">
+                    <button type="button" id="male" onclick="selectGender('male')">남성</button>
+                    <button type="button" id="female" onclick="selectGender('female')">여성</button>
+                </div>
+                <input type="hidden" id="gender" name="gender" />
+            </div>
+
+            <!-- 질병란 -->
+            <div class="form-group">
+                <div id="disease-label" onclick="toggleDiseaseButtons()">➡ 이 문구를 클릭하여 해당되는 질병을 선택해주세요 ⬅</div>
+                <div id="interest-buttons" class="interest-buttons" style="display:none;">
+                    <button type="button" onclick="selectInterest(this)">고혈압</button>
+                    <button type="button" onclick="selectInterest(this)">당뇨병</button>
+                    <button type="button" onclick="selectInterest(this)">특근질</button>
+                    <button type="button" onclick="selectInterest(this)">간질환</button>
+                    <button type="button" onclick="selectInterest(this)">만성 요통</button>
+                    <button type="button" onclick="selectInterest(this)">심장 질환</button>
+                    <button type="button" onclick="selectInterest(this)">시력 저하</button>
+                    <button type="button" onclick="selectInterest(this)">청력 저하</button>
+                    <button type="button" onclick="selectInterest(this)">없음</button>
+                </div>
+
+                <input type="hidden" id="interests" name="interests" />
+            </div>
+
+            <!--직업 선택 및 약관 동의 -->
+            <div class="form-group">
+                <label for="occupation">(기존) 직업</label>
+                <input type="text" id="occupation" name="occupation" placeholder="직업을 입력해주세요" required>
+            </div>
+
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="agree-all" onclick="toggleAllCheckboxes()">
+            <label for="agree-all">전체 동의 <br>&emsp;&nbsp;선택항목 포함 모든 약관에 동의합니다.</label>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="agree-age" class="agree-checkbox">
+            <label for="agree-age">(필수) 만 15세 이상입니다.</label>
+            <!-- 약관 동의 -->
+            <div class="checkbox-group">
+                <input type="checkbox" id="agree-terms" class="agree-checkbox">
+                <label for="agree-terms">(필수) 서비스 이용약관 동의</label>
+                <div id="age-content" class="scroll-box">
+                    <p>여기에 서비스 이용약관 내용</p>
+                </div>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="agree-privacy" class="agree-checkbox" required>
+                <label for="agree-privacy">(필수) 개인정보 처리 방침 동의</label>
+                <div id="privacy-content" class="scroll-box">
+                    <p>여기에 개인정보 처리 방침 내용
+                        ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+                        ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+                </div>
+            </div>
+
+            <!-- 스텝 2으로 넘어가게 하기 위한 버튼 -->
+            <button type="button" onclick="validateAndSubmit()">회원가입 하기</button>
+        </div>
+
+    </form>
+    <div th:if="${error}" style="color: red;">
+        <p th:text="${error}"></p>
+    </div>
+</div>
+</body>
+</html>
