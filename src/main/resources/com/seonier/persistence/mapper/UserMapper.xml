@@ -1,57 +1,98 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.seonier.persistence.mapper.UserMapper">
 
     <sql id="user">
         <![CDATA[
-              USR_NO            AS userNo
-            , USR_ID            AS userId
-            , PASSWD            AS passwd
-            , USR_NM            AS userName
-            , USR_MBTLNUM       AS mobileNumber
-            , USR_GRP_ID        AS userGroupId
-            , USE_AT            AS useAT
-            , CREAT_ID          AS createId
-            , CREAT_DT          AS createDate
-            , UPDT_ID           AS updateId
-            , UPDT_DT           AS updateDate
+        USR_NO            AS userNo
+          , USR_ID            AS userId
+          , PASSWD            AS passwd
+          , USR_NM            AS userName
+          , USR_MBTLNUM       AS mobileNumber
+          , USR_GRP_ID        AS userGroupId
+          , USE_AT            AS useAT
+          , CREAT_ID          AS createId
+          , CREAT_DT          AS createDate
+          , UPDT_ID           AS updateId
+          , UPDT_DT           AS updateDate
+          , USR_HEALTH1       AS userHealth1
+          , USR_HEALTH2       AS userHealth2
+          , USR_HEALTH3       AS userHealth3
+          , USR_HEALTH4       AS userHealth4
+          , USR_HEALTH5       AS userHealth5
+          , USR_HEALTH6       AS userHealth6
+          , USR_HEALTH7       AS userHealth7
+          , USR_HEALTH8       AS userHealth8
         ]]>
     </sql>
 
+    <!-- 사용자 번호로 조회 -->
     <select id="findByUserNo" resultType="com.seonier.persistence.model.User">
         <![CDATA[
-        -- 사용자 일련번호로 사용자 조회.
         SELECT
         ]]>
-            <include refid="user" />
+        <include refid="user"/>
         <![CDATA[
-        FROM
-            USR_INFO
-        WHERE
-            USR_NO              = #{userNo}
+        FROM USR_INFO
+        WHERE USR_NO = #{userNo}
         ]]>
     </select>
 
+    <!-- 사용자 아이디로 조회 -->
     <select id="findByUserId" resultType="com.seonier.persistence.model.User">
         <![CDATA[
-        -- 사용자 아이디로 사용자 조회.
         SELECT
-              USR_NO            AS userNo
-            , USR_ID            AS userId
-            , PASSWD            AS passwd
-            , USR_NM            AS userName
-            , USR_MBTLNUM       AS mobileNumber
-            , USR_GRP_ID        AS userGroupId
-            , USE_AT            AS useAT
-            , CREAT_ID          AS createId
-            , CREAT_DT          AS createDate
-            , UPDT_ID           AS updateId
-            , UPDT_DT           AS updateDate
-        FROM
-            USR_INFO
-        WHERE
-            USR_ID              = #{userId}
+        ]]>
+        <include refid="user"/>
+        <![CDATA[
+        FROM USR_INFO
+        WHERE USR_ID = #{userId}
         ]]>
     </select>
+
+    <!-- 사용자 회원가입 -->
+    <insert id="insertUser" parameterType="com.seonier.persistence.model.User">
+        <![CDATA[
+        INSERT INTO USR_INFO (
+                               USR_ID
+                             , PASSWD
+                             , USR_NM
+                             , USR_MBTLNUM
+                             , USR_GRP_ID
+                             , USE_AT
+                             , CREAT_ID
+                             , CREAT_DT
+                             , UPDT_ID
+                             , UPDT_DT
+                             , USR_HEALTH1
+                             , USR_HEALTH2
+                             , USR_HEALTH3
+                             , USR_HEALTH4
+                             , USR_HEALTH5
+                             , USR_HEALTH6
+                             , USR_HEALTH7
+                             , USR_HEALTH8
+        ) VALUES (
+                   #{userId}
+                 , #{passwd}
+                 , #{userName}
+                 , #{mobileNumber}
+                 , #{userGroupId}
+                 , #{useAT}
+                 , #{createId}
+                 , NOW()
+                 , #{updateId}
+                 , NOW()
+                 , #{userHealth1}
+                 , #{userHealth2}
+                 , #{userHealth3}
+                 , #{userHealth4}
+                 , #{userHealth5}
+                 , #{userHealth6}
+                 , #{userHealth7}
+                 , #{userHealth8}
+                 )
+        ]]>
+    </insert>
 
 </mapper>

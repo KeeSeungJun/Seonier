@@ -12,6 +12,16 @@ CREATE TABLE IF NOT EXISTS USR_INFO (
     , CREAT_DT                          TIMESTAMP                               NOT NULL DEFAULT CURRENT_TIMESTAMP      COMMENT '생성 일시'
     , UPDT_ID                           VARCHAR(50)                             NOT NULL                                COMMENT '수정 ID'
     , UPDT_DT                           TIMESTAMP                               NOT NULL                                COMMENT '수정 일시'
+    , USR_HEALTH1                       INT                                     NOT NULL                                COMMENT '고혈압'
+    , USR_HEALTH2                       INT                                     NOT NULL                                COMMENT '당뇨병'
+    , USR_HEALTH3                       INT                                     NOT NULL                                COMMENT '목디스크'
+    , USR_HEALTH4                       INT                                     NOT NULL                                COMMENT '관절염'
+    , USR_HEALTH5                       INT                                     NOT NULL                                COMMENT '만성요통'
+    , USR_HEALTH6                       INT                                     NOT NULL                                COMMENT '심장질환'
+    , USR_HEALTH7                       INT                                     NOT NULL                                COMMENT '시력저하'
+    , USR_HEALTH8                       INT                                     NOT NULL                                COMMENT '청력저하'
+
+
     , CONSTRAINT PK_USR_INFO PRIMARY KEY (USR_NO)
     , UNIQUE INDEX UK_USR_INFO01 (USR_ID, USE_AT)
     , INDEX IDX_USR_INFO01 (USR_ID)
@@ -36,19 +46,19 @@ INSERT INTO USR_INFO (USR_NO, USR_ID, PASSWD, USR_NM, USR_MBTLNUM, USR_GRP_ID, C
 
 -- group_info 테이블 생성
 CREATE TABLE IF NOT EXISTS group_info (
-                                          group_no                          INT UNSIGNED AUTO_INCREMENT             NOT NULL                                COMMENT '그룹 번호',
-                                          group_id INT NOT NULL,
-                                          group_nm VARCHAR(255) NOT NULL,
+    group_no                          INT UNSIGNED AUTO_INCREMENT             NOT NULL                                COMMENT '그룹 번호',
+    group_id INT NOT NULL,
+    group_nm VARCHAR(255) NOT NULL,
     CREAT_DT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UPDT_DT TIMESTAMP NOT NULL ,
     CONSTRAINT PK_GROUP_INFO PRIMARY KEY (group_no),
-     INDEX UK_GROUP_INFO01 (group_id),
-     INDEX UK_GROUP_INFO02 (group_nm)
+    UNIQUE INDEX UK_GROUP_INFO01 (group_id),
+    UNIQUE INDEX UK_GROUP_INFO02 (group_nm)
     ) AUTO_INCREMENT=1000000001 COMMENT = '그룹 정보';
 
 INSERT INTO group_info (group_no, group_id, group_nm, UPDT_DT) VALUES
-(1000000001, 0, '어드민', NOW())
-, (1000000002, 1,  '시니어', NOW())
+  (1000000001, 0, '어드민', NOW())
+, (1000000002, 1, '시니어', NOW())
     ON DUPLICATE KEY UPDATE
                          group_id                        = VALUES(group_id)
                              , group_nm                        = VALUES(group_nm)
