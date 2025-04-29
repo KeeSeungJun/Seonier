@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -71,17 +72,18 @@ public class UserService extends AbstractService {
 		user.setUpdateId("system");                            // 수정자 ID
 
 		// 건강 상태 (int 그대로 매핑)
-		user.setUserHealth1(params.getHealth1());
-		user.setUserHealth2(params.getHealth2());
-		user.setUserHealth3(params.getHealth3());
-		user.setUserHealth4(params.getHealth4());
-		user.setUserHealth5(params.getHealth5());
-		user.setUserHealth6(params.getHealth6());
-		user.setUserHealth7(params.getHealth7());
-		user.setUserHealth8(params.getHealth8());
+		user.setUserHealth1(StringUtils.equalsIgnoreCase(params.getHealth1(), "checked") ? "Y" : "N");
+		user.setUserHealth2(StringUtils.equalsIgnoreCase(params.getHealth2(), "checked") ? "Y" : "N");
+		user.setUserHealth3(StringUtils.equalsIgnoreCase(params.getHealth3(), "checked") ? "Y" : "N");
+		user.setUserHealth4(StringUtils.equalsIgnoreCase(params.getHealth4(), "checked") ? "Y" : "N");
+		user.setUserHealth5(StringUtils.equalsIgnoreCase(params.getHealth5(), "checked") ? "Y" : "N");
+		user.setUserHealth6(StringUtils.equalsIgnoreCase(params.getHealth6(), "checked") ? "Y" : "N");
+		user.setUserHealth7(StringUtils.equalsIgnoreCase(params.getHealth7(), "checked") ? "Y" : "N");
+		user.setUserHealth8(StringUtils.equalsIgnoreCase(params.getHealth8(), "checked") ? "Y" : "N");
 
 		// DB 저장
 		userMapper.insertUser(user);
+		log.debug(">>> User no: {}", user.getUserNo());
 
 		return DefaultResponse.builder()
 				.put("user_id", user.getUserId())

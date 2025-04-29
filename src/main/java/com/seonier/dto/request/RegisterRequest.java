@@ -37,12 +37,12 @@ public class RegisterRequest implements Serializable {
     private String email; // userId로 사용
 
     @NotEmpty(message = "비밀번호는 필수입니다.")
-    @Size(min = 6, max = 12, message = "비밀번호는 6자 이상 12자 이하로 입력해주세요.")
+//    @Size(min = 6, max = 12, message = "비밀번호는 6자 이상 12자 이하로 입력해주세요.")
     @JsonProperty("password")
     private String password;
 
     @NotEmpty(message = "비밀번호 확인은 필수입니다.")
-    @JsonProperty("confirm-password")
+    @JsonProperty("confirm_password")
     private String confirmPassword;
 
     @NotEmpty(message = "성별을 선택해주세요.")
@@ -52,7 +52,7 @@ public class RegisterRequest implements Serializable {
     @JsonProperty("interests")
     private String interests; // 여러 개 선택 가능성 있음 (구분자 ',' 사용)
 
-    @NotEmpty(message = "직업은 필수입니다.")
+//    @NotEmpty(message = "직업은 필수입니다.")
     @JsonProperty("occupation")
     private String occupation;
 
@@ -64,26 +64,26 @@ public class RegisterRequest implements Serializable {
 
     // === 여기가 핵심 수정 ===
     @JsonProperty("health1")
-    private int health1;
+    private String health1;
 
     @JsonProperty("health2")
-    private int health2;
+    private String health2;
 
     @JsonProperty("health3")
-    private int health3;
+    private String health3;
 
     @JsonProperty("health4")
-    private int health4;
+    private String health4;
 
     @JsonProperty("health5")
-    private int health5;
+    private String health5;
 
     @JsonProperty("health6")
-    private int health6;
+    private String health6;
 
     @JsonProperty("health7")
-    private int health7;
+    private String health7;
 
     @JsonProperty("health8")
-    private int health8;
+    private String health8;
 }

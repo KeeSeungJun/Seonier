@@ -93,6 +93,11 @@
                  , #{userHealth8}
                  )
         ]]>
+        <selectKey resultType="long" keyProperty="userNo" order="BEFORE">
+            <![CDATA[
+            SELECT LAST_INSERT_ID()
+            ]]>
+        </selectKey>
     </insert>
 
 </mapper>

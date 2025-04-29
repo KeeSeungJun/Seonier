@@ -75,40 +75,40 @@ public class User extends AbstractModel {
 	/**
 	 * 건강 상태 - 고혈압
 	 */
-	private int userHealth1;
+	private String userHealth1;
 
 	/**
 	 * 건강 상태 - 당뇨병
 	 */
-	private int userHealth2;
+	private String userHealth2;
 
 	/**
 	 * 건강 상태 - 목디스크
 	 */
-	private int userHealth3;
+	private String userHealth3;
 
 	/**
 	 * 건강 상태 - 관절염
 	 */
-	private int userHealth4;
+	private String userHealth4;
 
 	/**
 	 * 건강 상태 - 만성요통
 	 */
-	private int userHealth5;
+	private String userHealth5;
 
 	/**
 	 * 건강 상태 - 심장질환
 	 */
-	private int userHealth6;
+	private String userHealth6;
 
 	/**
 	 * 건강 상태 - 시력저하
 	 */
-	private int userHealth7;
+	private String userHealth7;
 
 	/**
 	 * 건강 상태 - 청력저하
 	 */
-	private int userHealth8;
+	private String userHealth8;
 }

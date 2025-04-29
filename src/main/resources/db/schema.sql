@@ -5,21 +5,21 @@ CREATE TABLE IF NOT EXISTS USR_INFO (
     , USR_ID                            VARCHAR(50)                             NOT NULL                                COMMENT '사용자 아이디'
     , PASSWD                            VARCHAR(200)                            NOT NULL                                COMMENT '비밀번호'
     , USR_NM                            VARCHAR(50)                             NOT NULL                                COMMENT '사용자 이름'
-    , USR_MBTLNUM                       VARCHAR(20)                             NOT NULL                                COMMENT '사용자 휴대폰번호'
+    , USR_MBTLNUM                       VARCHAR(20)                             NULL                                    COMMENT '사용자 휴대폰번호'
     , USR_GRP_ID                        VARCHAR(50)                             NOT NULL                                COMMENT '사용자 그룹 아이디'
     , USE_AT                            VARCHAR(10)                             NOT NULL DEFAULT 'YES'                  COMMENT '사용 여부'
     , CREAT_ID                          VARCHAR(50)                             NOT NULL                                COMMENT '생성 ID'
     , CREAT_DT                          TIMESTAMP                               NOT NULL DEFAULT CURRENT_TIMESTAMP      COMMENT '생성 일시'
     , UPDT_ID                           VARCHAR(50)                             NOT NULL                                COMMENT '수정 ID'
     , UPDT_DT                           TIMESTAMP                               NOT NULL                                COMMENT '수정 일시'
-    , USR_HEALTH1                       INT                                     NOT NULL                                COMMENT '고혈압'
-    , USR_HEALTH2                       INT                                     NOT NULL                                COMMENT '당뇨병'
-    , USR_HEALTH3                       INT                                     NOT NULL                                COMMENT '목디스크'
-    , USR_HEALTH4                       INT                                     NOT NULL                                COMMENT '관절염'
-    , USR_HEALTH5                       INT                                     NOT NULL                                COMMENT '만성요통'
-    , USR_HEALTH6                       INT                                     NOT NULL                                COMMENT '심장질환'
-    , USR_HEALTH7                       INT                                     NOT NULL                                COMMENT '시력저하'
-    , USR_HEALTH8                       INT                                     NOT NULL                                COMMENT '청력저하'
+    , USR_HEALTH1                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '고혈압, Y : 있음, N : 정상'
+    , USR_HEALTH2                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '당뇨병'
+    , USR_HEALTH3                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '목디스크'
+    , USR_HEALTH4                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '관절염'
+    , USR_HEALTH5                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '만성요통'
+    , USR_HEALTH6                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '심장질환'
+    , USR_HEALTH7                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '시력저하'
+    , USR_HEALTH8                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '청력저하'
 
 
     , CONSTRAINT PK_USR_INFO PRIMARY KEY (USR_NO)
@@ -68,7 +68,6 @@ INSERT INTO group_info (group_no, group_id, group_nm, UPDT_DT) VALUES
 
 
 
-/*
 -- user_info 테이블 생성
 CREATE TABLE IF NOT EXISTS user_info (
                                          user_no BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -103,6 +102,7 @@ CREATE TABLE IF NOT EXISTS user_health (
     CONSTRAINT fk_user_health FOREIGN KEY (user_id) REFERENCES user_info(user_id)
     );
 
+/*
 -- job_info 테이블 생성
 CREATE TABLE IF NOT EXISTS job_info (
                                         job_no BIGINT AUTO_INCREMENT PRIMARY KEY,
