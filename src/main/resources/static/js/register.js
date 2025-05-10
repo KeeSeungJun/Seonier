@@ -102,5 +102,4 @@ function validateAndSubmit() {
     }
 
     // 조건 통과 → 페이지 이동
-    window.location.href = "userconfirm.html";
 }

@@ -3,11 +3,7 @@ package com.seonier.persistence.model;
 import java.io.Serial;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -16,6 +12,7 @@ import lombok.experimental.SuperBuilder;
  * @version 1.0.0
  */
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
@@ -56,4 +53,62 @@ public class User extends AbstractModel {
 	 */
 	private String userGroupId;
 
+	/**
+	 * 사용 여부 (YES/NO)
+	 */
+	private String useAT;
+
+	/**
+	 * 생성자 ID
+	 */
+	private String createId;
+
+	/**
+	 * 수정자 ID
+	 */
+	private String updateId;
+
+	// ============================================
+	// 추가된 건강 상태 필드 (질병 여부 - int형)
+	// ============================================
+
+	/**
+	 * 건강 상태 - 고혈압
+	 */
+	private String userHealth1;
+
+	/**
+	 * 건강 상태 - 당뇨병
+	 */
+	private String userHealth2;
+
+	/**
+	 * 건강 상태 - 목디스크
+	 */
+	private String userHealth3;
+
+	/**
+	 * 건강 상태 - 관절염
+	 */
+	private String userHealth4;
+
+	/**
+	 * 건강 상태 - 만성요통
+	 */
+	private String userHealth5;
+
+	/**
+	 * 건강 상태 - 심장질환
+	 */
+	private String userHealth6;
+
+	/**
+	 * 건강 상태 - 시력저하
+	 */
+	private String userHealth7;
+
+	/**
+	 * 건강 상태 - 청력저하
+	 */
+	private String userHealth8;
 }
