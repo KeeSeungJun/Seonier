@@ -60,9 +60,9 @@ INSERT INTO group_info (group_no, group_id, group_nm, UPDT_DT) VALUES
   (1000000001, 0, '어드민', NOW())
 , (1000000002, 1, '시니어', NOW())
     ON DUPLICATE KEY UPDATE
-                         group_id                        = VALUES(group_id)
-                             , group_nm                        = VALUES(group_nm)
-                             , UPDT_DT                         = NOW()
+  group_id                        = VALUES(group_id)
+, group_nm                        = VALUES(group_nm)
+, UPDT_DT                         = NOW()
 ;
 
 
@@ -70,8 +70,8 @@ INSERT INTO group_info (group_no, group_id, group_nm, UPDT_DT) VALUES
 
 -- user_info 테이블 생성
 CREATE TABLE IF NOT EXISTS user_info (
-                                         user_no BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                         user_id VARCHAR(255) NOT NULL,
+    user_no BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
     user_nm VARCHAR(255),
     group_id INT,
     user_addr VARCHAR(255),
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS user_info (
 
 -- user_health 테이블 생성
 CREATE TABLE IF NOT EXISTS user_health (
-                                           user_health_no BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                           user_id VARCHAR(255) NOT NULL,
+    user_health_no BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
     user_health1_YN BOOLEAN,
     user_health2_YN BOOLEAN,
     user_health3_YN BOOLEAN,
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS user_health (
     CONSTRAINT fk_user_health FOREIGN KEY (user_id) REFERENCES user_info(user_id)
     );
 
-/*
+
 -- job_info 테이블 생성
 CREATE TABLE IF NOT EXISTS job_info (
                                         job_no BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS user_job (
     );
 
 -- faq 테이블 생성
-CREATE TABLE IF NOT EXISTS faq (
+CREATE TABLE IF NOT EXISTS FAQ (
                                    faq_no BIGINT AUTO_INCREMENT PRIMARY KEY,
                                    user_id VARCHAR(255) NOT NULL,
     faq_title VARCHAR(255),
@@ -145,9 +145,9 @@ CREATE TABLE IF NOT EXISTS faq (
     );
 
 -- qna 테이블 생성
-CREATE TABLE IF NOT EXISTS qna (
-                                   qna_no BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                   user_id VARCHAR(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS QNA (
+    qna_no BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
     qna_title VARCHAR(255),
     qna_body TEXT,
     qna_comment_yn BOOLEAN DEFAULT FALSE,
@@ -156,4 +156,3 @@ CREATE TABLE IF NOT EXISTS qna (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_qna_user FOREIGN KEY (user_id) REFERENCES user_info(user_id)
     );
-*/

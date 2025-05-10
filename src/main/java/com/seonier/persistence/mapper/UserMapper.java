@@ -10,5 +10,5 @@ public interface UserMapper {
 
 	User findByUserId(String userId);
 
-	void insertUser(User user);  // 🔥 추가! 반드시 필요
+	void insertUser(User user);
 }
