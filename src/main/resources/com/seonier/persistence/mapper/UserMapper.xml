@@ -15,6 +15,7 @@
           , CREAT_DT          AS createDate
           , UPDT_ID           AS updateId
           , UPDT_DT           AS updateDate
+          , USR_GENDER        AS gender
           , USR_HEALTH1       AS userHealth1
           , USR_HEALTH2       AS userHealth2
           , USR_HEALTH3       AS userHealth3
@@ -54,24 +55,25 @@
     <insert id="insertUser" parameterType="com.seonier.persistence.model.User">
         <![CDATA[
         INSERT INTO USR_INFO (
-                               USR_ID
-                             , PASSWD
-                             , USR_NM
-                             , USR_MBTLNUM
-                             , USR_GRP_ID
-                             , USE_AT
-                             , CREAT_ID
-                             , CREAT_DT
-                             , UPDT_ID
-                             , UPDT_DT
-                             , USR_HEALTH1
-                             , USR_HEALTH2
-                             , USR_HEALTH3
-                             , USR_HEALTH4
-                             , USR_HEALTH5
-                             , USR_HEALTH6
-                             , USR_HEALTH7
-                             , USR_HEALTH8
+                   USR_ID
+                 , PASSWD
+                 , USR_NM
+                 , USR_MBTLNUM
+                 , USR_GRP_ID
+                 , USE_AT
+                 , CREAT_ID
+                 , CREAT_DT
+                 , UPDT_ID
+                 , UPDT_DT
+                 , USR_GENDER
+                 , USR_HEALTH1
+                 , USR_HEALTH2
+                 , USR_HEALTH3
+                 , USR_HEALTH4
+                 , USR_HEALTH5
+                 , USR_HEALTH6
+                 , USR_HEALTH7
+                 , USR_HEALTH8
         ) VALUES (
                    #{userId}
                  , #{passwd}
@@ -83,6 +85,7 @@
                  , NOW()
                  , #{updateId}
                  , NOW()
+                 , #{gender}
                  , #{userHealth1}
                  , #{userHealth2}
                  , #{userHealth3}

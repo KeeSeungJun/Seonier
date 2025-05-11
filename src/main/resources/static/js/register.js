@@ -17,24 +17,81 @@ function toggleAllCheckboxes() {
     });
 }
 
-function selectInterest(button) {
-    const interest = button.textContent;
-    if (selectedInterests.includes(interest)) {
-        selectedInterests = selectedInterests.filter(i => i !== interest);
-        button.classList.remove('selected');
+
+// function selectInterest(button) {
+//     const interest = button.textContent;
+//     if (selectedInterests.includes(interest)) {
+//         selectedInterests = selectedInterests.filter(i => i !== interest);
+//         button.classList.remove('selected');
+//     } else {
+//         selectedInterests.push(interest);
+//         button.classList.add('selected');
+//     }
+//     document.getElementById('interests').value = selectedInterests.join(',');
+// }
+//
+// document.getElementById('registerForm').addEventListener('submit', function(e) {
+//     if (selectedInterests.length === 0) {
+//         e.preventDefault();
+//         alert('최소 1가지 이상의 질환을 선택해주세요.');
+//     }
+// });
+
+// 1) 버튼 클릭 처리
+function selectInterest(btn) {
+    const isNone = btn.dataset.none === 'true';
+    const allBtns = document.querySelectorAll('#interest-buttons button');
+
+    if (isNone) {
+        // “없음” 클릭: 모든 health 필드 N, 모든 버튼 선택 해제
+        allBtns.forEach(b => {
+            b.classList.remove('selected');
+            const field = b.dataset.field;
+            if (field) {
+                document.getElementById(field).value = 'N';
+            }
+        });
+        // “없음” 버튼만 selected
+        btn.classList.add('selected');
+
     } else {
-        selectedInterests.push(interest);
-        button.classList.add('selected');
+        // 일반 버튼 클릭 시 “없음” 해제
+        const noneBtn = document.querySelector('#interest-buttons button[data-none="true"]');
+        noneBtn.classList.remove('selected');
+
+        // 해당 버튼 토글: 히든 필드 Y/N 변경
+        const field = btn.dataset.field;
+        const input = document.getElementById(field);
+        const currentlyY = input.value === 'Y';
+
+        // 선택 상태 반전
+        input.value = currentlyY ? 'N' : 'Y';
+        btn.classList.toggle('selected', !currentlyY);
+        //console.log('input.value : ', input.value);
     }
-    document.getElementById('interests').value = selectedInterests.join(',');
 }
 
+// 2) 버튼에 이벤트 바인딩
+document.querySelectorAll('#interest-buttons button')
+    .forEach(btn => btn.addEventListener('click', () => selectInterest(btn)));
+
+
+// 3) 폼 제출 전 검증
 document.getElementById('registerForm').addEventListener('submit', function(e) {
-    if (selectedInterests.length === 0) {
+    // health1~8 중 하나라도 Y 인지 확인
+    let anySelected = false;
+    for (let i = 1; i <= 8; i++) {
+        if (document.getElementById(`USR_HEALTH${i}`).value === 'Y') {
+            anySelected = true;
+            break;
+        }
+    }
+    if (!anySelected) {
         e.preventDefault();
         alert('최소 1가지 이상의 질환을 선택해주세요.');
     }
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const scrollBoxes = document.querySelectorAll('.scroll-box');
@@ -51,6 +108,36 @@ function toggleDiseaseButtons() {
     const buttonContainer = document.getElementById('interest-buttons');
     const currentDisplay = buttonContainer.style.display;
     buttonContainer.style.display = currentDisplay === 'none' || currentDisplay === '' ? 'block' : 'none';
+}
+function selectDisease(btn) {
+    const isNone = btn.dataset.none === 'true';
+    const allButtons = document.querySelectorAll('#interest-buttons button');
+
+    if (isNone) {
+        // "없음" 클릭: 나머지 모두 해제 + 값 N
+        allButtons.forEach(b => {
+            b.classList.remove('selected');
+            const f = b.dataset.field;
+            if (f) document.getElementById(f).value = 'N';
+        });
+        btn.classList.add('selected');
+        return;
+    }
+
+    // 다른 버튼 클릭: "없음" 해제
+    const noneBtn = document.querySelector('#interest-buttons button[data-none="true"]');
+    noneBtn.classList.remove('selected');
+
+    // 해당 버튼 토글
+    const field = btn.dataset.field;
+    const input = document.getElementById(field);
+    if (btn.classList.contains('selected')) {
+        btn.classList.remove('selected');
+        input.value = 'N';
+    } else {
+        btn.classList.add('selected');
+        input.value = 'Y';
+    }
 }
 
 function validateAndSubmit() {
@@ -101,6 +188,11 @@ function validateAndSubmit() {
         return;
     }
 
+    //console.log('selectedDiseases:', selectedDiseases);
+    console.log(
+        '선택된 질환들 텍스트:',
+        Array.from(selectedDiseases).map(btn => btn.textContent)
+    );
     // 조건 통과 → 페이지 이동
     // document.getElementById('registerForm').submit();
 
@@ -112,6 +204,12 @@ function validateAndSubmit() {
         gender: gender,
         selected_diseases: selectedDiseases
     };
+
+    //console.log('selectedDiseases:', selectedDiseases);
+    //console.log('formData:', formData);
+
+
+
 
     fetch('/api/register', {
         method: 'POST',

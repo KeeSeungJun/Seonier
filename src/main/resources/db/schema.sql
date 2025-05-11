@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS USR_INFO (
     , CREAT_DT                          TIMESTAMP                               NOT NULL DEFAULT CURRENT_TIMESTAMP      COMMENT '생성 일시'
     , UPDT_ID                           VARCHAR(50)                             NOT NULL                                COMMENT '수정 ID'
     , UPDT_DT                           TIMESTAMP                               NOT NULL                                COMMENT '수정 일시'
+    , USR_GENDER                        ENUM('M', 'F')                          NOT NULL DEFAULT 'M'                    COMMENT '성별'
     , USR_HEALTH1                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '고혈압, Y : 있음, N : 정상'
     , USR_HEALTH2                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '당뇨병'
     , USR_HEALTH3                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '목디스크'
@@ -37,11 +38,11 @@ INSERT INTO USR_INFO (USR_NO, USR_ID, PASSWD, USR_NM, USR_MBTLNUM, USR_GRP_ID, C
 , (1000000002, 'test',  '{bcrypt}$2a$10$2IeGPuGnzDVrv5nPTSIrHeHnv7ua9csBUq7B1b3gK6uuhY.K3bxW2', '테스트', '01012345678', 'CUSTOMER', 'admin', 'admin', NOW())
 , (1000000003, 'guest', '{bcrypt}$2a$10$2IeGPuGnzDVrv5nPTSIrHeHnv7ua9csBUq7B1b3gK6uuhY.K3bxW2', '게스트', '01012345678', 'GUEST',    'admin', 'admin', NOW())
     ON DUPLICATE KEY UPDATE
-                         PASSWD                        = VALUES(PASSWD)
-                             , USR_NM                        = VALUES(USR_NM)
-                             , USR_GRP_ID                    = VALUES(USR_GRP_ID)
-                             , UPDT_ID                       = VALUES(UPDT_ID)
-                             , UPDT_DT                       = NOW()
+      PASSWD                        = VALUES(PASSWD)
+    , USR_NM                        = VALUES(USR_NM)
+    , USR_GRP_ID                    = VALUES(USR_GRP_ID)
+    , UPDT_ID                       = VALUES(UPDT_ID)
+    , UPDT_DT                       = NOW()
 ;
 
 -- group_info 테이블 생성

@@ -25,17 +25,16 @@
 <!-- 상단: 사용자 이름 -->
 <header>
     <h1 th:text="|${userName}님, 환영합니다!|"></h1>
-    <span class="text">ㅇㅇㅇ님, 환영합니다! </span> <!-- 테스트용 환영 문구. 추후 지워야함 -->
 </header>
 
 <!-- 중앙: 메뉴 버튼 -->
 <main>
     <div class="menu-buttons">
-        <a href="job.html" class="menu-button job-recommend">일자리 추천받기</a>
+        <a th:href="@{/job}" class="menu-button job-recommend">일자리 추천받기</a>
         <a href="newjob.html" class="menu-button new-job">새로 등록된 일자리</a>
 
         <div class="square-button-row">
-            <a href="faq.html" class="square-button">자주묻는 질문</a>
+            <a th:href="@{/faq}" class="square-button">자주묻는 질문</a>
             <a href="contactadmin.html" class="square-button">문의하기</a>
         </div>
     </div>
