@@ -2,7 +2,7 @@
 -- 사용자 정보 테이블
 CREATE TABLE IF NOT EXISTS USR_INFO (
       USR_NO                            INT UNSIGNED AUTO_INCREMENT             NOT NULL                                COMMENT '사용자 번호'
-    , USR_ID                            VARCHAR(50)                             NOT NULL                                COMMENT '사용자 아이디'
+    , USR_ID                            VARCHAR(50)                             NOT NULL                                COMMENT '사용자 아이디(이메일)'
     , PASSWD                            VARCHAR(200)                            NOT NULL                                COMMENT '비밀번호'
     , USR_NM                            VARCHAR(50)                             NOT NULL                                COMMENT '사용자 이름'
     , USR_MBTLNUM                       VARCHAR(20)                             NULL                                    COMMENT '사용자 휴대폰번호'
@@ -12,6 +12,10 @@ CREATE TABLE IF NOT EXISTS USR_INFO (
     , CREAT_DT                          TIMESTAMP                               NOT NULL DEFAULT CURRENT_TIMESTAMP      COMMENT '생성 일시'
     , UPDT_ID                           VARCHAR(50)                             NOT NULL                                COMMENT '수정 ID'
     , UPDT_DT                           TIMESTAMP                               NOT NULL                                COMMENT '수정 일시'
+    , USR_ADDR                          VARCHAR(255)                            NULL                                    COMMENT '주소'
+    , USR_ADDR_LAT                      DECIMAL(10,6)                           NULL                                    COMMENT '주소 위도'
+    , USR_ADDR_LON                      DECIMAL(10,6)                           NULL                                    COMMENT '주소 경도'
+    , USR_JOB_SCR                       INT                                     NULL                                    COMMENT '직업 추천 점수'
     , USR_GENDER                        ENUM('M', 'F')                          NOT NULL DEFAULT 'M'                    COMMENT '성별'
     , USR_HEALTH1                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '고혈압, Y : 있음, N : 정상'
     , USR_HEALTH2                       ENUM('Y', 'N')                          NOT NULL DEFAULT 'N'                    COMMENT '당뇨병'

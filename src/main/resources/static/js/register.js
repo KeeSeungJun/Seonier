@@ -196,12 +196,22 @@ function validateAndSubmit() {
     // 조건 통과 → 페이지 이동
     // document.getElementById('registerForm').submit();
 
+
+
     const formData = {
         name: name,
         email: email,
         password: password,
         confirm_password: confirmPassword,
         gender: gender,
+        health1: document.getElementById("USR_HEALTH1").value.trim(),
+        health2: document.getElementById("USR_HEALTH2").value.trim(),
+        health3: document.getElementById("USR_HEALTH3").value.trim(),
+        health4: document.getElementById("USR_HEALTH4").value.trim(),
+        health5: document.getElementById("USR_HEALTH5").value.trim(),
+        health6: document.getElementById("USR_HEALTH6").value.trim(),
+        health7: document.getElementById("USR_HEALTH7").value.trim(),
+        health8: document.getElementById("USR_HEALTH8").value.trim(),
         selected_diseases: selectedDiseases
     };
 

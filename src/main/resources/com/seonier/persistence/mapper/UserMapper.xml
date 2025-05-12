@@ -65,6 +65,10 @@
                  , CREAT_DT
                  , UPDT_ID
                  , UPDT_DT
+                 , USR_ADDR
+                 , USR_ADDR_LAT
+                 , USR_ADDR_LON
+                 , USR_JOB_SCR
                  , USR_GENDER
                  , USR_HEALTH1
                  , USR_HEALTH2
@@ -85,6 +89,10 @@
                  , NOW()
                  , #{updateId}
                  , NOW()
+                 , #{userAddr}
+                 , #{userAddrLat}
+                 , #{userAddrLon}
+                 , #{userJobScr}
                  , #{gender}
                  , #{userHealth1}
                  , #{userHealth2}
