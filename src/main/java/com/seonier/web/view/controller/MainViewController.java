@@ -96,5 +96,27 @@ public class MainViewController extends AbstractViewController {
 		return "view/job";
 	}
 
-	// (추가로 /newjob 같은 페이지도 아래에 매핑을 추가하시면 됩니다.)
+	/** 자주 묻는 질문 (FAQ) 관리 페이지 */
+	@GetMapping("/faqmanage")
+	public String faqManagePage(Model model) {
+		log.debug("Access the FAQ Manage page.");
+		// TODO: service 호출하여 model.addAttribute("faqs", faqService.findAll());
+		return "view/faqmanage";
+	}
+
+	/** 일자리 등록 페이지 */
+	@GetMapping("/jobadd")
+	public String jobAddPage(Model model) {
+		log.debug("Access the Job Add page.");
+		// TODO: 사전 데이터(카테고리 목록 등) model 에 실어주기
+		return "view/jobadd";
+	}
+
+	/** Q&A 관리 페이지 */
+	@GetMapping("/qnamanage")
+	public String qnaManagePage(Model model) {
+		log.debug("Access the QnA Manage page.");
+		// TODO: service 호출하여 model.addAttribute("questions", qnaService.findAll());
+		return "view/qnamanage";
+	}
 }
