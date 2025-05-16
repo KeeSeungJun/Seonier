@@ -42,18 +42,24 @@
             <div class="form-group">
                 <div id="disease-label" onclick="toggleDiseaseButtons()">➡ 이 문구를 클릭하여 해당되는 질병을 선택해주세요 ⬅</div>
                 <div id="interest-buttons" class="interest-buttons" style="display:none;">
-                    <button type="button" onclick="selectInterest(this)">고혈압</button>
-                    <button type="button" onclick="selectInterest(this)">당뇨병</button>
-                    <button type="button" onclick="selectInterest(this)">특근질</button>
-                    <button type="button" onclick="selectInterest(this)">간질환</button>
-                    <button type="button" onclick="selectInterest(this)">만성 요통</button>
-                    <button type="button" onclick="selectInterest(this)">심장 질환</button>
-                    <button type="button" onclick="selectInterest(this)">시력 저하</button>
-                    <button type="button" onclick="selectInterest(this)">청력 저하</button>
-                    <button type="button" onclick="selectInterest(this)">없음</button>
+                    <button type="button" data-field="USR_HEALTH1" onclick="selectInterest(this)">고혈압</button>
+                    <button type="button" data-field="USR_HEALTH2" onclick="selectInterest(this)">당뇨병</button>
+                    <button type="button" data-field="USR_HEALTH3" onclick="selectInterest(this)">목디스크</button>
+                    <button type="button" data-field="USR_HEALTH4" onclick="selectInterest(this)">간질환</button>
+                    <button type="button" data-field="USR_HEALTH5" onclick="selectInterest(this)">만성 요통</button>
+                    <button type="button" data-field="USR_HEALTH6" onclick="selectInterest(this)">심장 질환</button>
+                    <button type="button" data-field="USR_HEALTH7" onclick="selectInterest(this)">시력 저하</button>
+                    <button type="button" data-field="USR_HEALTH8" onclick="selectInterest(this)">청력 저하</button>
+                    <button type="button" data-none="true"         onclick="selectInterest(this)">없음</button>
                 </div>
-
-                <input type="hidden" id="interests" name="interests" />
+                <input type="hidden" id="USR_HEALTH1" name="health1" value="N">
+                <input type="hidden" id="USR_HEALTH2" name="health2" value="N">
+                <input type="hidden" id="USR_HEALTH3" name="health3" value="N">
+                <input type="hidden" id="USR_HEALTH4" name="health4" value="N">
+                <input type="hidden" id="USR_HEALTH5" name="health5" value="N">
+                <input type="hidden" id="USR_HEALTH6" name="health6" value="N">
+                <input type="hidden" id="USR_HEALTH7" name="health7" value="N">
+                <input type="hidden" id="USR_HEALTH8" name="health8" value="N">
             </div>
 
             <!--직업 선택 및 약관 동의 -->
@@ -85,8 +91,7 @@
                 <label for="agree-privacy">(필수) 개인정보 처리 방침 동의</label>
                 <div id="privacy-content" class="scroll-box">
                     <p>여기에 개인정보 처리 방침 내용
-                        ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                        ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+                        </p>
                 </div>
             </div>
 

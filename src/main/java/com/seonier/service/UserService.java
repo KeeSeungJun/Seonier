@@ -51,6 +51,17 @@ public class UserService extends AbstractService {
 	public DefaultResponse registerUser(@Valid RegisterRequest params) {
 		log.debug("Register user: {}", params);
 
+		log.debug("▶▶▶ Incoming health flags: health1={}, health2={}, health3={}, health4={}, health5={}, health6={}, health7={}, health8={}",
+				params.getHealth1(),
+				params.getHealth2(),
+				params.getHealth3(),
+				params.getHealth4(),
+				params.getHealth5(),
+				params.getHealth6(),
+				params.getHealth7(),
+				params.getHealth8()
+		);
+
 		// 아이디 중복 체크
 		User existingUser = userMapper.findByUserId(params.getEmail());
 		if (existingUser != null) {
@@ -71,15 +82,36 @@ public class UserService extends AbstractService {
 		user.setCreateId("system");                            // 생성자 ID
 		user.setUpdateId("system");                            // 수정자 ID
 
+		String raw = params.getGender(); // "male" or "female"
+		String code = raw.equalsIgnoreCase("male") ? "M" : "F";
+		user.setGender(code);
+
+	//	user.setGender(params.getGender());
+
 		// 건강 상태 (int 그대로 매핑)
-		user.setUserHealth1(StringUtils.equalsIgnoreCase(params.getHealth1(), "checked") ? "Y" : "N");
-		user.setUserHealth2(StringUtils.equalsIgnoreCase(params.getHealth2(), "checked") ? "Y" : "N");
-		user.setUserHealth3(StringUtils.equalsIgnoreCase(params.getHealth3(), "checked") ? "Y" : "N");
-		user.setUserHealth4(StringUtils.equalsIgnoreCase(params.getHealth4(), "checked") ? "Y" : "N");
-		user.setUserHealth5(StringUtils.equalsIgnoreCase(params.getHealth5(), "checked") ? "Y" : "N");
-		user.setUserHealth6(StringUtils.equalsIgnoreCase(params.getHealth6(), "checked") ? "Y" : "N");
-		user.setUserHealth7(StringUtils.equalsIgnoreCase(params.getHealth7(), "checked") ? "Y" : "N");
-		user.setUserHealth8(StringUtils.equalsIgnoreCase(params.getHealth8(), "checked") ? "Y" : "N");
+//		user.setUserHealth1(StringUtils.equalsIgnoreCase(params.getHealth1(), "checked") ? "Y" : "N");
+//		user.setUserHealth2(StringUtils.equalsIgnoreCase(params.getHealth2(), "checked") ? "Y" : "N");
+//		user.setUserHealth3(StringUtils.equalsIgnoreCase(params.getHealth3(), "checked") ? "Y" : "N");
+//		user.setUserHealth4(StringUtils.equalsIgnoreCase(params.getHealth4(), "checked") ? "Y" : "N");
+//		user.setUserHealth5(StringUtils.equalsIgnoreCase(params.getHealth5(), "checked") ? "Y" : "N");
+//		user.setUserHealth6(StringUtils.equalsIgnoreCase(params.getHealth6(), "checked") ? "Y" : "N");
+//		user.setUserHealth7(StringUtils.equalsIgnoreCase(params.getHealth7(), "checked") ? "Y" : "N");
+//		user.setUserHealth8(StringUtils.equalsIgnoreCase(params.getHealth8(), "checked") ? "Y" : "N");
+
+		//user.setUserHealth1("Y".equalsIgnoreCase(params.getHealth1()) ? "Y" : "N");
+		String h1 = "Y".equalsIgnoreCase(params.getHealth1()) ? "Y" : "N";
+		log.debug("Mapping health1: raw='{}' → mapped='{}'", params.getHealth1(), h1);
+		user.setUserHealth1(h1);
+
+		user.setUserHealth2("Y".equalsIgnoreCase(params.getHealth2()) ? "Y" : "N");
+		user.setUserHealth3("Y".equalsIgnoreCase(params.getHealth3()) ? "Y" : "N");
+		user.setUserHealth4("Y".equalsIgnoreCase(params.getHealth4()) ? "Y" : "N");
+		user.setUserHealth5("Y".equalsIgnoreCase(params.getHealth5()) ? "Y" : "N");
+		user.setUserHealth6("Y".equalsIgnoreCase(params.getHealth6()) ? "Y" : "N");
+		user.setUserHealth7("Y".equalsIgnoreCase(params.getHealth7()) ? "Y" : "N");
+		user.setUserHealth8("Y".equalsIgnoreCase(params.getHealth8()) ? "Y" : "N");
+
+
 
 		// DB 저장
 		userMapper.insertUser(user);

@@ -102,4 +102,37 @@ function validateAndSubmit() {
     }
 
     // 조건 통과 → 페이지 이동
+    // document.getElementById('registerForm').submit();
+
+    const formData = {
+        name: name,
+        email: email,
+        password: password,
+        confirm_password: confirmPassword,
+        gender: gender,
+        selected_diseases: selectedDiseases
+    };
+
+    fetch('/api/register', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data:', data)
+            if (data.code === 200) {
+                console.log('Success:', data.message)
+                window.location.href = "/main?user_id=" + data.user_id;
+            } else {
+                alert(`[ ERROR ]: ${data.message}`)
+            }
+        })
+        .catch(error => {
+            console.log('Error:', error)
+            alert(`[ ERROR ]: ${error}`)
+        });
 }
