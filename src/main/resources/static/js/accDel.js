@@ -76,3 +76,13 @@ document.addEventListener('keydown', (e) => {
         modalBg.classList.remove('active');
     }
 });
+
+// 계정 탈퇴시 login.html로 이동하는 코드입니다. 서버와 연동필요 합니다@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @PostMapping("/accDelConfirm")
+// public String processAccountDeletion(HttpSession session, ...) {
+//     // 1. 계정 삭제 처리
+//     // 2. 세션 무효화
+//     session.invalidate();
+//     // 3. 로그인 페이지로 리디렉션
+//     return "redirect:/login.html";
+// }
