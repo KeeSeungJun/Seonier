@@ -80,7 +80,6 @@ function saveDiseases() {
 
     // 이후 실제 저장 로직을 여기에 작성 가능 (예: 서버 전송)@@@@@@@
 
-    // 모달 닫기
     document.getElementById("diseaseModal").style.display = "none";
 }
 
@@ -90,3 +89,46 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 };
+
+// 인증
+let timerInterval;
+let remainingTime = 180;
+
+function startVerification() {
+    const phone = document.getElementById('phone').value.trim();
+
+    if (phone.length !== 11) {
+        alert("전화번호를 11자리로 정확히 입력해주세요.");
+        return;
+    }
+
+    clearInterval(timerInterval);
+    remainingTime = 180;
+    updateTimerDisplay();
+
+    timerInterval = setInterval(() => {
+        remainingTime--;
+        updateTimerDisplay();
+
+        if (remainingTime <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('timer').textContent = "시간초과";
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const minutes = String(Math.floor(remainingTime / 60)).padStart(2, '0');
+    const seconds = String(remainingTime % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+}
+
+function verifyCode() {
+    const code = document.getElementById('verification-code').value;
+    if (code.length < 6) {
+        alert("인증번호 6자리를 입력해주세요.");
+        return;
+    }
+
+    alert("인증 완료!");
+}

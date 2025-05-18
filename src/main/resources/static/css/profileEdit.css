@@ -54,7 +54,6 @@ main {
     text-decoration: none;
 }
 
-/* 메인 */
 .profile-box {
     max-width: 600px;
     margin: 0 auto;
@@ -93,13 +92,68 @@ main {
 .toggle-password {
     position: absolute;
     top: 40%;
-    right: 12px;
+    right: 40px;
     transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
     font-size: 18px;
     color: #666;
+}
+
+.phone-container,
+.verification-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.phone-container input,
+.verification-container input {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.phone-container button,
+.verification-container button {
+    box-sizing: border-box;
+    margin-top: -15px;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    background-color: #4fb0ff;
+    color: white;
+    border: none;
+    line-height: 1.2;
+}
+
+.verification-container .input-with-timer {
+    flex: 1;
+    position: relative;
+}
+
+.verification-container input {
+    flex: 1;
+    padding: 10px;
+    padding-right: 70px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: auto;
+}
+
+#timer {
+    position: absolute;
+    right: 40px;
+    top: 36%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
 }
 
 .gender-buttons {
@@ -217,4 +271,24 @@ main {
 
 /* 모바일 화면 */
 @media (max-width: 768px) {
+    #timer {
+        position: absolute;
+        right: 10px;
+        top: 36%;
+        transform: translateY(-50%);
+        font-size: 14px;
+        color: #555;
+        font-weight: bold;
+    }
+    .toggle-password {
+        position: absolute;
+        top: 40%;
+        right: 12px;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        color: #666;
+    }
 }

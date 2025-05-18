@@ -22,7 +22,19 @@
     <input type="date" id="birthdate" placeholder="1990-01-01">
 
     <h3>연락처</h3>
-    <input type="tel" id="phone" placeholder="010-1234-5678">
+    <div class="phone-container">
+      <input type="tel" id="phone" maxlength="11" placeholder="전화번호 입력"
+             oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)">
+      <button type="button" onclick="startVerification()">인증번호</button>
+    </div>
+    <div class="verification-container">
+      <div class="input-with-timer">
+        <input type="text" id="verification-code" maxlength="6" placeholder="인증번호 인증하기"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        <span id="timer">03:00</span>
+      </div>
+      <button type="button" onclick="verifyCode()">인증하기</button>
+    </div>
 
     <h3>비밀번호 수정</h3>
     <div class="password-container">
@@ -48,8 +60,6 @@
       <button type="button" class="gender-btn" data-gender="M" onclick="selectGender(this)">남성</button>
       <button type="button" class="gender-btn" data-gender="F" onclick="selectGender(this)">여성</button>
     </div>
-
-    <button class="submit-button" onclick="submitProfile()">저장하기</button>
   </div>
 </main>
 
