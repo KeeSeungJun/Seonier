@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;/
+    height: 100vh;
     text-align: center;
 }
 
@@ -37,11 +37,13 @@ main {
 }
 
 #map {
-    width: 320px;
-    height: 650px;
-    border: 2px dashed #4fb0ff; /* 지도 위치 참고 라인선 */
-    border-radius: 10px;         /* 지도 위치 참고 라인선 */
-    background-color: #f9f9f9;   /* 지도 위치 참고 라인선 */
+    margin: 0 auto 100px auto;
+    margin-bottom: 100px;
+    width: 350px;
+    height: 680px;
+    /*border: 2px dashed #4fb0ff; !* 지도 위치 참고 라인선 *!*/
+    /*border-radius: 10px;         !* 지도 위치 참고 라인선 *!*/
+    /*background-color: #f9f9f9;   !* 지도 위치 참고 라인선 *!*/
 }
 /* 모바일 화면 */
 @media (max-width: 768px) {
