@@ -3,31 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>일반 프로필</title>
+  <title>내 프로필</title>
   <link rel="stylesheet" th:href="@{/css/profile.css}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
 <header>
-  <span class="text"> 내 프로필 </span>
+  <span class="text">내 프로필</span>
 </header>
-<!-- 중앙: 메뉴 버튼 -->
+
 <main>
-  <div class="menu-buttons">
-    <a href="profileEdit.html" class="menu-button general-profile">프로필 수정</a>
-    <a href="inqList.html" class="menu-button general-profile">문의 내역</a>
-    <a href="jobHistory.html" class="menu-button general-profile">일자리 조회 기록</a>
-    <a href="accDel" class="menu-button general-profile">계정 탈퇴</a>
+  <div class="profile-container">
+    <div class="profile-section">
+      <h3>기본 정보</h3>
+      <div class="info-group">
+        <label>이름:</label>
+        <span th:text="${user.userName}">사용자</span>
+      </div>
+      <div class="info-group">
+        <label>이메일:</label>
+        <span th:text="${user.userId}">user@example.com</span>
+      </div>
+      <div class="info-group">
+        <label>전화번호:</label>
+        <span th:text="${user.mobileNumber}">010-1234-5678</span>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h3>나의 질병 정보</h3>
+      <div class="disease-grid">
+        <button type="button" class="disease-option" th:classappend="${user.userHealth1 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health1">고혈압</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth2 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health2">당뇨병</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth3 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health3">목디스크</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth4 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health4">관절염</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth5 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health5">만성 요통</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth6 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health6">심장 질환</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth7 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health7">시력저하</button>
+        <button type="button" class="disease-option" th:classappend="${user.userHealth8 == 'Y' ? 'selected' : ''}" onclick="toggleDisease(this)" data-disease="health8">청력저하</button>
+      </div>
+      <input type="hidden" id="health1" name="health1" th:value="${user.userHealth1}">
+      <input type="hidden" id="health2" name="health2" th:value="${user.userHealth2}">
+      <input type="hidden" id="health3" name="health3" th:value="${user.userHealth3}">
+      <input type="hidden" id="health4" name="health4" th:value="${user.userHealth4}">
+      <input type="hidden" id="health5" name="health5" th:value="${user.userHealth5}">
+      <input type="hidden" id="health6" name="health6" th:value="${user.userHealth6}">
+      <input type="hidden" id="health7" name="health7" th:value="${user.userHealth7}">
+      <input type="hidden" id="health8" name="health8" th:value="${user.userHealth8}">
+      <button class="save-button" onclick="saveHealthInfo()">건강 정보 저장</button>
+    </div>
+
+    <div class="profile-section">
+      <h3>계정 관리</h3>
+      <button class="edit-button" onclick="location.href='profileEdit.html'">프로필 수정</button>
+      <button class="password-button" onclick="location.href='passwordChange.html'">비밀번호 변경</button>
+    </div>
   </div>
 </main>
 
-<!-- 하단 아이콘 메뉴 -->
-<!--  프로필 페이지(adminprofile.html)는 로그인 아이디값으로 개인 고유의 프로필 입장일 시 수정 필요-->
 <div class="bottom-icons">
   <a href="profile.html" class="icon-link"><i class="fa-solid fa-user" style="color: #000000;"></i></a>
   <a href="main.html" class="icon-link"><i class="fa-solid fa-house" style="color: #000000;"></i></a>
   <a href="map.html" class="icon-link"><i class="fa-solid fa-map" style="color: #000000;"></i></a>
 </div>
+
 <script th:src="@{/js/profile.js}"></script>
 </body>
 </html>
