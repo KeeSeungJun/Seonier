@@ -1,4 +1,3 @@
-
 -- 사용자 정보 테이블
 CREATE TABLE IF NOT EXISTS USR_INFO (
       USR_NO                            INT UNSIGNED AUTO_INCREMENT             NOT NULL                                COMMENT '사용자 번호'
@@ -110,8 +109,8 @@ CREATE TABLE IF NOT EXISTS user_health (
 
 -- job_info 테이블 생성
 CREATE TABLE IF NOT EXISTS job_info (
-                                        job_no BIGINT AUTO_INCREMENT PRIMARY KEY,
-                                        user_id VARCHAR(255),
+    job_no BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(255),
     job_title VARCHAR(255),
     job_task VARCHAR(255),
     job_desc VARCHAR(1000),
@@ -123,10 +122,18 @@ CREATE TABLE IF NOT EXISTS job_info (
     job_pay VARCHAR(100),
     job_tel VARCHAR(20),
     job_req_gender CHAR(1),
+    job_health1_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '고혈압 제한',
+    job_health2_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '당뇨병 제한',
+    job_health3_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '목디스크 제한',
+    job_health4_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '관절염 제한',
+    job_health5_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '만성요통 제한',
+    job_health6_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '심장질환 제한',
+    job_health7_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '시력저하 제한',
+    job_health8_restrict ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '청력저하 제한',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_job_user FOREIGN KEY (user_id) REFERENCES user_info(user_id)
-    );
+);
 
 -- user_job 테이블 생성
 CREATE TABLE IF NOT EXISTS user_job (

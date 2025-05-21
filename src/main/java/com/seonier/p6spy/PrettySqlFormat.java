@@ -14,7 +14,8 @@ import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class PrettySqlFormat implements MessageFormattingStrategy {
+public class
+PrettySqlFormat implements MessageFormattingStrategy {
 
 	@Override
 	public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared,

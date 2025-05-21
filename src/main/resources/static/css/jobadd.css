@@ -130,3 +130,26 @@ main {
         max-width: 500px;
     }
 }
+
+.disease-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.disease-option {
+    padding: 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.disease-option.selected {
+    background-color: #4fb0ff;
+    color: white;
+    border-color: #4fb0ff;
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seonier.persistence.mapper.JobMapper">
+
+    <sql id="jobColumns">
+        job_no AS jobNo,
+        user_id AS userId,
+        job_title AS jobTitle,
+        job_task AS jobTask,
+        job_desc AS jobDesc,
+        job_cate AS jobCate,
+        job_addr AS jobAddr,
+        job_addr_lat AS jobAddrLat,
+        job_addr_lon AS jobAddrLon,
+        job_url AS jobUrl,
+        job_pay AS jobPay,
+        job_tel AS jobTel,
+        job_req_gender AS jobReqGender,
+        job_health1_restrict AS jobHealth1Restrict,
+        job_health2_restrict AS jobHealth2Restrict,
+        job_health3_restrict AS jobHealth3Restrict,
+        job_health4_restrict AS jobHealth4Restrict,
+        job_health5_restrict AS jobHealth5Restrict,
+        job_health6_restrict AS jobHealth6Restrict,
+        job_health7_restrict AS jobHealth7Restrict,
+        job_health8_restrict AS jobHealth8Restrict
+    </sql>
+
+    <!-- 사용자의 질병 정보를 고려한 일자리 검색 -->
+    <select id="findJobsForUser" resultType="com.seonier.persistence.model.Job">
+        SELECT 
+        <include refid="jobColumns"/>
+        FROM job_info j
+        WHERE 1=1
+        AND (
+            (#{userHealth1} = 'N' OR j.job_health1_restrict = 'N')
+            AND (#{userHealth2} = 'N' OR j.job_health2_restrict = 'N')
+            AND (#{userHealth3} = 'N' OR j.job_health3_restrict = 'N')
+            AND (#{userHealth4} = 'N' OR j.job_health4_restrict = 'N')
+            AND (#{userHealth5} = 'N' OR j.job_health5_restrict = 'N')
+            AND (#{userHealth6} = 'N' OR j.job_health6_restrict = 'N')
+            AND (#{userHealth7} = 'N' OR j.job_health7_restrict = 'N')
+            AND (#{userHealth8} = 'N' OR j.job_health8_restrict = 'N')
+        )
+        ORDER BY j.created_at DESC
+    </select>
+
+    <!-- 일자리 등록 -->
+    <insert id="insertJob" parameterType="com.seonier.persistence.model.Job">
+        INSERT INTO job_info (
+            user_id,
+            job_title,
+            job_task,
+            job_desc,
+            job_cate,
+            job_addr,
+            job_addr_lat,
+            job_addr_lon,
+            job_url,
+            job_pay,
+            job_tel,
+            job_req_gender,
+            job_health1_restrict,
+            job_health2_restrict,
+            job_health3_restrict,
+            job_health4_restrict,
+            job_health5_restrict,
+            job_health6_restrict,
+            job_health7_restrict,
+            job_health8_restrict
+        ) VALUES (
+            #{userId},
+            #{jobTitle},
+            #{jobTask},
+            #{jobDesc},
+            #{jobCate},
+            #{jobAddr},
+            #{jobAddrLat},
+            #{jobAddrLon},
+            #{jobUrl},
+            #{jobPay},
+            #{jobTel},
+            #{jobReqGender},
+            #{jobHealth1Restrict},
+            #{jobHealth2Restrict},
+            #{jobHealth3Restrict},
+            #{jobHealth4Restrict},
+            #{jobHealth5Restrict},
+            #{jobHealth6Restrict},
+            #{jobHealth7Restrict},
+            #{jobHealth8Restrict}
+        )
+    </insert>
+</mapper> 

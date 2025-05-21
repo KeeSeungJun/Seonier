@@ -42,6 +42,29 @@
       <input type="text" id="companyContact" name="companyContact" placeholder="업체 연락처를 입력하세요" class="form-input">
     </div>
 
+    <div class="form-input-group">
+      <label>질병 제한 선택</label>
+      <div class="disease-grid">
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health1">고혈압</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health2">당뇨병</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health3">목디스크</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health4">관절염</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health5">만성 요통</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health6">심장 질환</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health7">시력저하</button>
+        <button type="button" class="disease-option" onclick="toggleDisease(this)" data-disease="health8">청력저하</button>
+      </div>
+      <!-- 히든 필드 추가 -->
+      <input type="hidden" id="health1" name="health1_restrict" value="N">
+      <input type="hidden" id="health2" name="health2_restrict" value="N">
+      <input type="hidden" id="health3" name="health3_restrict" value="N">
+      <input type="hidden" id="health4" name="health4_restrict" value="N">
+      <input type="hidden" id="health5" name="health5_restrict" value="N">
+      <input type="hidden" id="health6" name="health6_restrict" value="N">
+      <input type="hidden" id="health7" name="health7_restrict" value="N">
+      <input type="hidden" id="health8" name="health8_restrict" value="N">
+    </div>
+
     <!-- 등록 버튼 -->
     <button type="submit" class="menu-button contact-submit">등록하기</button>
   </form>
