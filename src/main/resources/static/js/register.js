@@ -1,3 +1,77 @@
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
+const modal = document.getElementById('disease-modal');
+const openBtn = document.getElementById('open-disease-modal');
+const confirmBtn = document.getElementById('confirmBtn');
+
+if(openBtn){
+    openBtn.addEventListener('click', () => {
+        restoreModalSelections();
+        modal.style.display = 'flex';
+    });
+}
+
+function restoreModalSelections() {
+    const hiddenInput = document.getElementById('selectedDiseases');
+    const selectedText = hiddenInput.value;
+    const selectedArray = selectedText ? selectedText.split(',').map(s => s.trim()) : [];
+
+    const buttons = document.querySelectorAll('.health-buttons button');
+    buttons.forEach(btn => btn.classList.remove('selected'));
+
+    buttons.forEach(btn => {
+        if(selectedArray.includes(btn.textContent.trim())) {
+            btn.classList.add('selected');
+        }
+    });
+
+    const customInput = document.getElementById('customDisease');
+    const customValue = selectedArray.find(val =>
+        !Array.from(buttons).some(btn => btn.textContent.trim() === val)
+    ) || '';
+    customInput.value = customValue;
+}
+
+function selectInterest(btn) {
+    btn.classList.toggle('selected');
+}
+
+if(confirmBtn){
+    confirmBtn.addEventListener('click', () => {
+        const selectedBtns = document.querySelectorAll('.health-buttons button.selected');
+        const selectedValues = Array.from(selectedBtns).map(btn => btn.textContent.trim());
+
+        const customDisease = document.getElementById('customDisease').value.trim();
+        if (customDisease) {
+            selectedValues.push(customDisease);
+        }
+
+        document.getElementById('selectedDiseases').value = selectedValues.join(', ');
+
+        console.log('선택된 질병:', selectedValues);
+
+        modal.style.display = 'none';
+
+        // 입력창 초기화는 모달 닫을 때 초기화하지 말고, 다음 모달 열 때 복원하도록 변경
+        // document.getElementById('customDisease').value = '';
+
+        // 선택된 버튼 초기화 코드 제거 (값 유지하려면 필요 없음)
+        // selectedBtns.forEach(btn => btn.classList.remove('selected'));
+    });
+}
+
+const modals = document.querySelectorAll('.modal');
+modals.forEach(modal => {
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
+// 모달 끝
+
 let selectedInterests = [];
 
 function selectGender(gender) {
@@ -29,13 +103,6 @@ function selectInterest(button) {
     document.getElementById('interests').value = selectedInterests.join(',');
 }
 
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    if (selectedInterests.length === 0) {
-        e.preventDefault();
-        alert('최소 1가지 이상의 질환을 선택해주세요.');
-    }
-});
-
 document.addEventListener('DOMContentLoaded', function() {
     const scrollBoxes = document.querySelectorAll('.scroll-box');
     scrollBoxes.forEach(function(box) {
@@ -59,27 +126,34 @@ function validateAndSubmit() {
     const password = document.getElementById("password").value.trim();
     const confirmPassword = document.getElementById("confirm-password").value.trim();
     const gender = document.getElementById("gender").value.trim();
-    const selectedDiseases = document.querySelectorAll("#interest-buttons button.selected");
-
-    // 약관 체크박스들
+    const occupation = document.getElementById("occupation").value.trim();
+    const selectedDiseases = document.getElementById('selectedDiseases').value.trim();
+    const birthdate = document.getElementById("birthdate").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const verificationCode = document.getElementById("verification-code").value.trim();
+    const postcode = document.getElementById("sample6_postcode").value.trim();
+    const address = document.getElementById("sample6_address").value.trim();
+    const detailAddress = document.getElementById("sample6_detailAddress").value.trim();
     const agreeAge = document.getElementById("agree-age").checked;
     const agreeTerms = document.getElementById("agree-terms").checked;
     const agreePrivacy = document.getElementById("agree-privacy").checked;
 
-    // 이름 확인
     if (name.length < 2) {
         alert("이름은 두 글자 이상 입력해주세요.");
         return;
     }
 
-    // 이메일 형식 확인
+    if (!birthdate || !phone || !verificationCode || !postcode || !address || !detailAddress) {
+        alert("모든 필수 정보를 입력해주세요.");
+        return;
+    }
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
         alert("올바른 이메일 형식을 입력해주세요.");
         return;
     }
 
-    // 비밀번호 확인
     if (!password || !confirmPassword) {
         alert("비밀번호를 입력해주세요.");
         return;
@@ -89,13 +163,21 @@ function validateAndSubmit() {
         return;
     }
 
-    // 성별, 질병 확인
-    if (!gender || selectedDiseases.length === 0) {
+    if (!selectedDiseases) {
         alert("모든 필수 정보를 입력해주세요.");
         return;
     }
 
-    // 약관 동의 확인
+    if (!occupation) {
+        alert("모든 필수 정보를 입력해주세요.");
+        return;
+    }
+
+    if (!gender) {
+        alert("모든 필수 정보를 입력해주세요.");
+        return;
+    }
+
     if (!agreeAge || !agreeTerms || !agreePrivacy) {
         alert("모든 필수 약관에 동의하셔야 합니다.");
         return;
@@ -110,7 +192,6 @@ function validateAndSubmit() {
         password: password,
         confirm_password: confirmPassword,
         gender: gender,
-        selected_diseases: selectedDiseases
     };
 
     fetch('/api/register', {
@@ -136,3 +217,115 @@ function validateAndSubmit() {
             alert(`[ ERROR ]: ${error}`)
         });
 }
+
+function toggleVisibility(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+function handlePhoneInput() {
+    const phoneInput = document.getElementById('phone');
+    phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '').slice(0, 11);
+
+    const sendBtn = document.getElementById('send-code-btn');
+    sendBtn.disabled = phoneInput.value.length !== 11;
+}
+
+let timerInterval;
+let timeLeft = 180;
+
+function startVerification() {
+    const verifyBtn = document.getElementById('verify-code-btn');
+    verifyBtn.disabled = true;
+    timeLeft = 180;
+    updateTimer();
+
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimer();
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            document.getElementById('timer').textContent = '시간 종료';
+            verifyBtn.disabled = true;
+        }
+    }, 1000);
+}
+
+function updateTimer() {
+    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+    const seconds = String(timeLeft % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = `${minutes}:${seconds}`;
+}
+
+function handleVerificationInput() {
+    const codeInput = document.getElementById('verification-code');
+    codeInput.value = codeInput.value.replace(/[^0-9]/g, '').slice(0, 6);
+
+    const verifyBtn = document.getElementById('verify-code-btn');
+    verifyBtn.disabled = codeInput.value.length !== 6;
+}
+
+function verifyCode() {
+    alert('인증번호 확인 처리 (실제 로직 필요)');
+}
+
+// 주소
+function openPostcodeModal() {
+    new daum.Postcode({
+        popup: false,
+        width: 350,    // 모달 width와 맞춰줘야 함
+        height: 400,   // 모달 height와 맞춰줘야 함
+        oncomplete: function(data) {
+            var addr = '';
+            var extraAddr = '';
+
+            if (data.userSelectedType === 'R') {
+                addr = data.roadAddress;
+            } else {
+                addr = data.jibunAddress;
+            }
+
+            if(data.userSelectedType === 'R'){
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                document.getElementById('sample6_extraAddress').value = extraAddr;
+            } else {
+                document.getElementById('sample6_extraAddress').value = '';
+            }
+
+            document.getElementById('sample6_postcode').value = data.zonecode;
+            document.getElementById('sample6_address').value = addr;
+            document.getElementById('sample6_detailAddress').focus();
+
+            document.getElementById('postcodeOverlay').style.display = 'none';
+        },
+        onclose: function() {
+            document.getElementById('postcodeOverlay').style.display = 'none';
+        }
+    }).embed(document.getElementById('postcodeModal'));
+
+    document.getElementById('postcodeOverlay').style.display = 'flex';
+}
+document.getElementById('postcodeOverlay').addEventListener('click', function(event) {
+    if(event.target === this) {
+        this.style.display = 'none';
+    }
+});
