@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/login.css}" />
-    <link rel="stylesheet" href="/css/login.css" />
 </head>
 <body>
 <div class="login-container">
@@ -25,6 +24,10 @@
     <div class="links">
         <span class="text">계정이 없으신가요? </span>
         <a href="register.html" class="register-link">회원가입</a>
+    </div>
+    <div class="links pwd">
+        <span class="text">비밀번호를 잊으셨나요? </span>
+        <a href="findpwd.html" class="findpwd">비밀번호 찾기</a>
     </div>
     <div th:if="${error}" style="color: red;">
         <p th:text="${error}"></p>
