@@ -38,7 +38,7 @@ main {
 .menu-button {
     display: block;
     width: 90%;
-    max-width: 350px;
+    max-width: 250px;
     padding: 18px;
     background-color: #62adff;
     color: white;

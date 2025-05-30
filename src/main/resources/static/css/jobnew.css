@@ -47,11 +47,12 @@ header .text {
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    max-width: 1000px;
+    max-width: 313px;
     background-color: #f1f1f1;
     border: 1px solid #ccc;
     padding: 5px 18px;
     z-index: 999;
+    margin-top: 34px;
 }
 
 .info-item {
@@ -80,13 +81,14 @@ header .text {
     left: 50%;
     transform: translateX(-50%);
     width: 84%;
-    max-width: 1000px;
+    max-width: 330px;
     height: 175px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     padding: 10px;
     overflow-y: auto;
     z-index: 998;
+    margin-top: 45px;
 }
 
 /* 각 박스 항목 */
@@ -204,4 +206,35 @@ header .text {
 }
 /* 모바일 화면 */
 @media (max-width: 768px) {
+    .info-box {
+        display: flex;
+        justify-content: center;
+        gap: 0px;
+        position: fixed;
+        top: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        max-width: 1000px;
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        padding: 5px 18px;
+        z-index: 999;
+        margin-top: 0px;
+    }
+    .new-jobs {
+        margin-top: 10px;
+        position: fixed;
+        top: 535px; /* info-box 아래 위치 */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 84%;
+        max-width: 1000px;
+        height: 175px; /* 고정 높이 */
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 10px;
+        overflow-y: auto; /* 세로 스크롤 */
+        z-index: 998;
+    }
 }
