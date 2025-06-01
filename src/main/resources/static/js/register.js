@@ -241,45 +241,6 @@ function handlePhoneInput() {
     sendBtn.disabled = phoneInput.value.length !== 11;
 }
 
-let timerInterval;
-let timeLeft = 180;
-
-function startVerification() {
-    const verifyBtn = document.getElementById('verify-code-btn');
-    verifyBtn.disabled = true;
-    timeLeft = 180;
-    updateTimer();
-
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimer();
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            document.getElementById('timer').textContent = '시간 종료';
-            verifyBtn.disabled = true;
-        }
-    }, 1000);
-}
-
-function updateTimer() {
-    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-    const seconds = String(timeLeft % 60).padStart(2, '0');
-    document.getElementById('timer').textContent = `${minutes}:${seconds}`;
-}
-
-function handleVerificationInput() {
-    const codeInput = document.getElementById('verification-code');
-    codeInput.value = codeInput.value.replace(/[^0-9]/g, '').slice(0, 6);
-
-    const verifyBtn = document.getElementById('verify-code-btn');
-    verifyBtn.disabled = codeInput.value.length !== 6;
-}
-
-function verifyCode() {
-    alert('인증번호 확인 처리 (실제 로직 필요)');
-}
-
 // 주소
 function openPostcodeModal() {
     new daum.Postcode({
