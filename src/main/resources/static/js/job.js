@@ -1,7 +1,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=388f60e5d406e9da08ab57134ab2dc46"></script>
     var container = document.getElementById('map');
 
-    // 목원대 D관 위치 설정 (지도 기본 위치값은 목원대 d관입니다)
+    // 목원대 D관 위치 설정 (지도 기본 위치값은 목원대 d관입니다 수정필요)
     var options = {
     center: new kakao.maps.LatLng(36.32183, 127.3386),
     level: 3
