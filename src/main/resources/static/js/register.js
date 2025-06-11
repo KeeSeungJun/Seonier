@@ -134,9 +134,11 @@ function validateAndSubmit() {
     const postcode = document.getElementById("sample6_postcode").value.trim();
     const address = document.getElementById("sample6_address").value.trim();
     const detailAddress = document.getElementById("sample6_detailAddress").value.trim();
+
     const agreeAge = document.getElementById("agree-age").checked;
     const agreeTerms = document.getElementById("agree-terms").checked;
     const agreePrivacy = document.getElementById("agree-privacy").checked;
+
 
     if (name.length < 2) {
         alert("이름은 두 글자 이상 입력해주세요.");
@@ -156,6 +158,10 @@ function validateAndSubmit() {
 
     if (!password || !confirmPassword) {
         alert("비밀번호를 입력해주세요.");
+        return;
+    }
+    if (password.length < 6) {
+        alert("비밀번호는 6자리 이상 입력해주세요!");
         return;
     }
     if (password !== confirmPassword) {
@@ -182,9 +188,6 @@ function validateAndSubmit() {
         alert("모든 필수 약관에 동의하셔야 합니다.");
         return;
     }
-
-    // 조건 통과 → 페이지 이동
-    // document.getElementById('registerForm').submit();
 
     const formData = {
         name: name,
